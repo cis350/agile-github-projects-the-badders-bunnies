@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import Button from '@mui/material/Button';
+import CommentList from './commentList.tsx';
 
 // Types for the props
 type CommentInputProps = {
@@ -80,19 +81,19 @@ const SingleComment: React.FC<SingleCommentProps> = ({nameText, commentText , de
       </div>
         <div>
           {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
-          <CommentParent showReply={showReply} depth={depth+1}/>
+          <Post showReply={showReply} depth={depth+1}/>
         </div>
 
     </>
   );
 };
 
-type CommentParentProps = {
+type PostProps = {
   showReply: boolean;
   depth: number;
 }
 
-const CommentParent: React.FC<CommentParentProps> = ({showReply, depth}) => {
+const Post: React.FC<PostProps> = ({showReply, depth}) => {
   const [commentDisplay, setCommentDisplay] = useState<string[][]>([]);
   const [nameText, setNameText] = useState('');
   const [commentText, setCommentText] = useState('');
@@ -104,24 +105,24 @@ const CommentParent: React.FC<CommentParentProps> = ({showReply, depth}) => {
       setNameText('');
     }
   };
+
   return (
     <>
-      <div className="input">
-        {showReply && < CommentInput
-          addComment={() => addComment()}
-          nameText={nameText}
-          setNameText={setNameText}
-          commentText={commentText}
-          setCommentText={setCommentText}
-        />}
-      </div>
-      <div className="commentBoard" id={(depth+1).toString()}>
-        {commentDisplay.map((nameCommentTuple, index) => (
-          <SingleComment key={index} nameText={nameCommentTuple[0]} commentText={nameCommentTuple[1]} depth={depth} />
-        ))}
-      </div>
+        <div className="group">
+            <div className="post" /* post content */>
+                <h2>Lonely</h2>
+                <p>I'm feeling lonely today... someone please cheer me up :3</p>
+            </div>
+            <div className="commentList">
+                <CommentList></CommentList>
+            </div>
+        </div>
     </>
-  );
+  )
+
+//   return (
+
+//   );
 };
 
-export default CommentParent;
+export default Post;

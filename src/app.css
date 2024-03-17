@@ -29,57 +29,63 @@
   max-width: 20em;
 }
 
-#0 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1em;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 0.5em;
-  width: 120%;
-  max-width: 20em;
+.app {
+  width: 100%; /* Take full width of the viewport */
 }
 
-#1 {
+.group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1em;
-  padding: 1em;
+  align-items: flex-start; /* Left-align content within the post */
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-top: 0em;
+  padding-bottom: 0em;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  width: 60%;
-  max-width: 20em;
+  width: 96%;
 }
 
-#2 {
+.post {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1em;
-  padding: 1em;
+  align-items: flex-start; /* Left-align content within the post */
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-top: 0em;
+  padding-bottom: 0em;
+  padding-left: 2%;
+  padding-right: 2%;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  width: 10%;
-  max-width: 20em;
+  width: 92%;
 }
 
-.commentBoard {
+.post h2 {
+  font-size: 1.5em; /* Adjust h2 font size */
+  margin-bottom: -0.5em; /* Reduce gap between header and paragraphs */
+}
+
+.commentList {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 1em;
-  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-top: 0em;
+  padding-bottom: 0em;
+  padding-left: 2%;
+  padding-right: 2%;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  width: 100%;
-  max-width: 20em;
-
+  width: 92%;
 }
 
 .logo {
