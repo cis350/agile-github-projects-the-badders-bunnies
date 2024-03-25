@@ -1,16 +1,23 @@
 import './app.css';
+import Home from './pages/home.jsx';
 import Post from './post.tsx';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
 
   return (
     <>
-      <div className="app">
-        <h1>PennKudos</h1>
-        <hr/>
-        <Post showReply={true} depth={0}/>
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
     </>
+    
   );
 }
 
