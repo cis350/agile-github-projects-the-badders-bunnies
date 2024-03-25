@@ -13,6 +13,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
     "turbo": "^1.11.2"
   }
 }
