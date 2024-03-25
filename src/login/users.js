@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb');
-const { closeMongoDBConnection, getDB } = require('./dbUtils');
+import { ObjectId } from 'mongodb';
+import { closeMongoDBConnection, getDB } from './dbUtils';
 
 /**
  *
@@ -113,7 +113,7 @@ async function main() {
 }
 main();
 // export the functions
-module.exports = {
+export default {
   addUser,
   getAllUsers,
   getUser,

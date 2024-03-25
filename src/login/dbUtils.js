@@ -3,7 +3,7 @@
  */
 
 // import the driver
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 // DB location
 const dbURL = 'mongodb+srv://cis350coding:cis3500-2024.1@cluster0.if3dm.mongodb.net/SP24_3500_Project?retryWrites=true&w=majority&appName=Cluster0';
@@ -51,7 +51,7 @@ const closeMongoDBConnection = async () => {
 };
 
 // export the functions
-module.exports = {
+export default {
   closeMongoDBConnection,
   getDB,
 };
