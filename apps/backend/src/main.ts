@@ -26,7 +26,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }))
 
-
 const uri = "mongodb+srv://james:applepie@cis3500.yqpjrwc.mongodb.net/?retryWrites=true&w=majority&appName=CIS3500";
 
 mongoose.connect(uri)
@@ -42,9 +41,9 @@ app.get('/api/hello', (_, res) => {
   res.json({ message: 'Hello, frontend!' });
 });
 
-app.post('/api/account', (_, res) => {
+app.use('/api/account', accountRouter);
 
-});
+app.use('/api/questions', questionsRouter);
 
 // listen
 app.listen(PORT, () => {
