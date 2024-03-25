@@ -1,10 +1,17 @@
-import mongoose from "mongoose";
+// src/models/question.ts
+import mongoose, { Document, Schema } from 'mongoose';
 
-const questionSchema = new mongoose.Schema({
-    questionText: { type: String, required: true },
-    answer: { type: String, required: true },
-    author : { type: String, required: true },
-  });
-  
-  const Question = mongoose.model('User', questionSchema);
-  export default Question;
+interface IQuestion extends Document {
+  questionText: string;
+  answer: string;
+  author: string;
+}
+
+const QuestionSchema: Schema = new Schema({
+  questionText: { type: String, required: true },
+  answer: { type: String, required: false },
+  author: { type: String, required: true },
+});
+
+const Question = mongoose.model<IQuestion>('Question', QuestionSchema);
+export default Question;

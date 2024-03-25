@@ -1,11 +1,12 @@
+
+// read environment variables from .env file
+dotenv.config();
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
 import accountRouter from './routes/account';
 import questionsRouter from './routes/questions';
-// const accountRouter = require('./routes/account.ts');
-// const questionsRoutes = require('./routes/questions.ts');
 
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
@@ -28,7 +29,13 @@ app.use(cookieSession({
 
 const uri = "mongodb+srv://james:applepie@cis3500.yqpjrwc.mongodb.net/?retryWrites=true&w=majority&appName=CIS3500";
 
-mongoose.connect(uri);
+mongoose.connect(uri)
+  .then(() => {
+    console.log('Successfully connected to MongoDB.');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error.message);
+  });
 
 // define root route
 app.get('/api/hello', (_, res) => {
@@ -36,11 +43,12 @@ app.get('/api/hello', (_, res) => {
 });
 
 app.post('/api/account', (_, res) => {
- 
-}); 
+
+});
 
 // listen
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Now listening on port ${PORT}.`);
 });
+
