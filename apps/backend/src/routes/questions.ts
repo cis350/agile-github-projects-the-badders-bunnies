@@ -2,12 +2,12 @@ import express from 'express';
 import Question from '../models/question';
 import requireAuth from '../middlewares/require-auth';
 
-
 const router = express.Router();
 
+
 // Fetch all questions
-router.get('/', requireAuth, async (req, res) => {
-  // Implement logic to fetch questions
+router.get('/', async (req, res) => {
+  res.send('hi! \n');
 });
 
 // Add a question
