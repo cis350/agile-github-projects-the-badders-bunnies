@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
+import { authRequest } from '../custom-types';
 
-const requireAuth = (req: Request, res: Response, next: NextFunction): void => {
+const requireAuth = (req: authRequest, res: Response, next: NextFunction): void => {
   // Assuming the user information is stored in req.session.user
   // Check if the user is not present or the user is an empty string
   if (!req.session || !req.session.user || req.session.user === '') {

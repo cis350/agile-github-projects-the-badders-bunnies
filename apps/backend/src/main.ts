@@ -1,13 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
+import cookieSession from 'cookie-session';
+import bodyParser from 'body-parser';
 
 import accountRouter from './routes/account';
 import questionsRouter from './routes/questions';
-import { getDB } from './database.js';
-
-var bodyParser = require('body-parser');
-var cookieSession = require('cookie-session');
 
 // read environment variables from .env file
 dotenv.config();
@@ -15,47 +13,35 @@ const PORT = process.env.PORT ?? 8000;
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended:  true }));
-
 app.use(cookieSession({
   name: 'session',
-  keys: ['key1', 'key2'],
+  keys: ['k1', 'k2'],
   maxAge: 24 * 60 * 60 * 1000
-}))
+}));
 
+app.use(bodyParser.json());
 
-
-// mongoose.connect(uri)
-//   .then(() => {
-//     console.log('Successfully connected to MongoDB.');
-//   })
-//   .catch((error) => {
-//     console.error('Error connecting to MongoDB:', error.message);
-//   });
+const MONGO_URI = 'mongodb+srv://james:applepie@cis3500.yqpjrwc.mongodb.net/'
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    console.log('MongoDB connection success.');
+  })
+  .catch((error) => {
+    console.error('MongoDB connection error:', error.message);
+  });
 
 // define root route
-app.get('/', async (_, res) => {
-  const db = await getDB();
-  //play with database
-  const users = await db.collection('users');
-  //work with the users
-
-
-  res.json({ message: 'hi, frontend!' });
-});
-
-app.get('/api/hello', (_, res) => {
+app.get('/', (_, res) => {
   res.json({ message: 'Hello, frontend!' });
 });
 
+// account routes
 app.use('/api/account', accountRouter);
 
+// question routes
 app.use('/api/questions', questionsRouter);
 
 // listen
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Now listening on port ${PORT}.`);
 });
-
