@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "testCIS3500-backend",
+  "name": "CIS3500",
   "type": "collection",
   "ignore": [
     "node_modules",

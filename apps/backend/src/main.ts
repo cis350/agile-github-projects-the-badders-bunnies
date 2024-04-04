@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 import bodyParser from 'body-parser';
+import { MONGO_URI } from '../mongoURI';
 
 import accountRouter from './routes/account';
 import questionsRouter from './routes/questions';
@@ -21,7 +22,6 @@ app.use(cookieSession({
 
 app.use(bodyParser.json());
 
-const MONGO_URI = 'mongodb+srv://james:applepie@cis3500.yqpjrwc.mongodb.net/'
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('MongoDB connection success.');
