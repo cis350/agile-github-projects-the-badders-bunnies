@@ -21,7 +21,7 @@ app.use(cookieSession({
 
 app.use(bodyParser.json());
 
-const MONGO_URI = 'mongodb+srv://james:applepie@cis3500.yqpjrwc.mongodb.net/'
+const MONGO_URI = 'mongodb+srv://pennkudos:*6SentimentAnalysis9*@cluster0.egcfqtx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('MongoDB connection success.');
