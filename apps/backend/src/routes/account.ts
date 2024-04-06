@@ -4,8 +4,14 @@ import jwt from 'jsonwebtoken'
 
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+  res.status(200).json({ message: "Hello account API!" });
+});
+
 // Signup
 router.post('/signup', async (req, res) => {
+  console.log("tried to signup");
+
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ message: "Cannot post empty password or username"})
@@ -24,7 +30,7 @@ router.post('/signup', async (req, res) => {
     req.session.user = { userId: newUser._id };
   }
 
-  res.status(200).json({ message: "Signup successful." });
+  return res.status(200).json({ message: "Signup successful." });
 
 });
 

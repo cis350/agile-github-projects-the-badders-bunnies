@@ -35,6 +35,10 @@ app.get('/', (_, res) => {
   res.json({ message: 'Hello, frontend!' });
 });
 
+app.get('/api/', (_, res) => {
+  res.json({ message: 'hello api!' });
+});
+
 // account routes
 app.use('/api/account', accountRouter);
 
