@@ -1,22 +1,14 @@
 import express from 'express';
 import User from '../models/user';
-import jwt from 'jsonwebtoken'
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  res.status(200).json({ message: "Hello account API!" });
-});
-
 // Signup
 router.post('/signup', async (req, res) => {
-  console.log("tried to signup");
-
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ message: "Cannot post empty password or username"})
   }
-
   const existingUser = await User.findOne({ username });
   if (existingUser) {
     return res.status(400).json({ message: "Username is already in use." });
@@ -27,29 +19,39 @@ router.post('/signup', async (req, res) => {
 
   // Set user info in session
   if (req.session) {
-    req.session.user = { userId: newUser._id };
+    req.session.user = { username: newUser.username };
   }
 
-  return res.status(200).json({ message: "Signup successful." });
+  res.status(200).json({ message: "Signup successful." });
 
 });
 
 // Login
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+    const { username, password } = req.body;
 
-  const user = await User.findOne({ username });
-  if (!user) {
-    return res.status(404).json({ message: "User not found." });
-  }
-  if (password !== user.password) {
-    return res.status(401).json({ message: "Invalid password." });
-  }
-  const token = jwt.sign({ userId: user._id }, 'fortnitebattleroyale', { expiresIn: '24h' });
+    const user = await User.findOne({ username });
+    if (!user) {
+        return res.status(404).json({ message: "User not found." });
+    }
+    if (password !== user.password) {
+        return res.status(401).json({ message: "Invalid password." });
+    }
+    if (req.session) {
+      req.session.user = {username: user.username};
+    }
 
-  res.status(200).json({ token });
+    res.status(200).json({ message: "Login Successful" });
 
 });
+
+router.get('/current-user', (req, res) => {
+  if (req.session && req.session.user) {
+    return res.json({ username: req.session.user.username });
+  }
+  res.status(404).json({ message: "No user logged in" });
+});
+
 
 // Logout
 router.post('/logout', (req, res) => {

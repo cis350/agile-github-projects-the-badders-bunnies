@@ -10,48 +10,66 @@ router.get('/', async (req, res) => {
     const allQuestions = await Question.find();
     res.status(200).json(allQuestions);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Questions Cannot Load" });
   }
 });
 
 // Add a question
 router.post('/add', requireAuth, async (req, res) => {
-  console.log(req.session);
   const { questionText } = req.body;
-  const author = req.session?.user.userId;
+  const author = req.session?.user?.username; // Added safe chaining for user
+
   if (!questionText) {
     return res.status(400).json({ message: "Cannot use empty question text" });
   }
+
+  if (!author) {
+    return res.status(403).json({ message: "No author found in session" });
+  }
+
   try {
     const addedQuestion = new Question({ questionText, author });
     await addedQuestion.save();
     res.status(200).json(addedQuestion);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Error handling adding question" });
   }
 });
 
 // Answer a question
-router.post('/answer', requireAuth, async (req, res) => {
-  const { _id, answer } = req.body;
-  if (!_id || !answer) {
-    return res.status(400).json({ message: "No question ID or answer" });
+router.post('/:questionId/answer', requireAuth, async (req, res) => {
+  const { questionId } = req.params;
+  const { answer } = req.body;
+
+  if (!answer) {
+    return res.status(400).json({ message: "Answer text must be provided" });
   }
 
   try {
-    const singleQuestion = await Question.findById(_id);
-    if (!singleQuestion) {
+    const question = await Question.findById(questionId);
+
+    if (!question) {
       return res.status(404).json({ message: "Question not found" });
     }
-    singleQuestion.answer = answer;
-    await singleQuestion.save();
-    res.status(200).json(singleQuestion);
+    question.answer = answer;
+    await question.save();
+    res.status(200).json(question);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error handling adding answer" });
+    res.status(500).json({ message: "Server error updating the answer" });
   }
 });
+
+router.get('/:questionId', async (req, res) => {
+  try {
+    const question = await Question.findById(req.params.questionId);
+    if (!question) {
+      return res.status(404).json({ message: "Question not found" });
+    }
+    res.status(200).json(question);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching question" });
+  }
+});
+
 
 export default router;
