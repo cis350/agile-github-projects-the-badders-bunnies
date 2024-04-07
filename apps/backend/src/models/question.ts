@@ -1,4 +1,4 @@
-// src/models/question.ts
+// src/models/Question.ts
 import mongoose, { Document, Schema } from 'mongoose';
 
 interface IQuestion extends Document {
