@@ -3,14 +3,13 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 import bodyParser from 'body-parser';
-import { MONGO_URI } from '../mongoURI';
 
 import accountRouter from './routes/account';
 import questionsRouter from './routes/questions';
 
 // read environment variables from .env file
 dotenv.config();
-const PORT = process.env.PORT ?? 3001;
+const PORT = process.env.PORT ?? 8000;
 
 const app = express();
 
@@ -21,6 +20,8 @@ app.use(cookieSession({
 }));
 
 app.use(bodyParser.json());
+
+const MONGO_URI = "mongodb+srv://pennkudos:*6SentimentAnalysis9*@cluster0.egcfqtx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(MONGO_URI)
   .catch((error) => {
