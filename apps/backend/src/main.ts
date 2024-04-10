@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 import bodyParser from 'body-parser';
+import { MONGO_URI } from '../mongoURI';
 
 import accountRouter from './routes/account';
 import questionsRouter from './routes/questions';
@@ -21,7 +22,6 @@ app.use(cookieSession({
 
 app.use(bodyParser.json());
 
-const MONGO_URI = 'mongodb+srv://pennkudos:*6SentimentAnalysis9*@cluster0.egcfqtx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(MONGO_URI)
   .catch((error) => {
     console.error('MongoDB connection error:', error.message);
