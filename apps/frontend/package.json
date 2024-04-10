@@ -10,10 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.15",
+    "@mui/styled-engine": "^5.15.14",
     "bootstrap": "^5.3.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@cis-1962/eslint-config": "^1.0.4",

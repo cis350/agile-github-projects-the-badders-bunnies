@@ -10,7 +10,7 @@ import questionsRouter from './routes/questions';
 
 // read environment variables from .env file
 dotenv.config();
-const PORT = process.env.PORT ?? 8000;
+const PORT = process.env.PORT ?? 3001;
 
 const app = express();
 
@@ -23,9 +23,6 @@ app.use(cookieSession({
 app.use(bodyParser.json());
 
 mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('MongoDB connection success.');
-  })
   .catch((error) => {
     console.error('MongoDB connection error:', error.message);
   });
@@ -33,6 +30,14 @@ mongoose.connect(MONGO_URI)
 // define root route
 app.get('/', (_, res) => {
   res.json({ message: 'Hello, frontend!' });
+});
+
+app.get('/api/bye', (_, res) => {
+  return res.json({ message: 'Bye, frontend!' });
+});
+
+app.get('/api/hello', (_, res) => {
+  return res.json({ message: 'Hello, frontend!' });
 });
 
 // account routes
