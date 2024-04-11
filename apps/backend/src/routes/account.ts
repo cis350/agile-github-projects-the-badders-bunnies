@@ -35,7 +35,6 @@ const router = express.Router();
  *     }
  */
 
-// Signup
 router.post('/signup', async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -89,7 +88,6 @@ router.post('/signup', async (req, res) => {
  *     }
  */
 
-// Login
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
