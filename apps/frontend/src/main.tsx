@@ -6,6 +6,7 @@ import AddQuestionsPage from './AddQuestionsPage.tsx';
 import { createHashRouter } from 'react-router-dom';
 import { RouterProvider } from "react-router-dom";
 import QuestionDetailPage from './QuestionDetailPage.tsx';
+import DemoPage from './Demo.tsx';
 
 import './index.css';
 import Root from "./routes/root.tsx";
