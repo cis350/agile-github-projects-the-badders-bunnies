@@ -16,12 +16,12 @@ const app = express();
 app.use(cookieSession({
   name: 'session',
   keys: ['k1', 'k2'],
-  maxAge: 24 * 60 * 60 * 1000
+  maxAge: 24 * 60 * 60 * 1000,
 }));
 
 app.use(bodyParser.json());
 
-const MONGO_URI = "mongodb+srv://pennkudos:*6SentimentAnalysis9*@cluster0.egcfqtx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const MONGO_URI = 'mongodb+srv://pennkudos:*6SentimentAnalysis9*@cluster0.egcfqtx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(MONGO_URI)
   .catch((error) => {
@@ -34,11 +34,11 @@ app.get('/', (_, res) => {
 });
 
 app.get('/api/bye', (_, res) => {
-  return res.json({ message: 'Bye, frontend!' });
+  res.json({ message: 'Bye, frontend!' });
 });
 
 app.get('/api/hello', (_, res) => {
-  return res.json({ message: 'Hello, frontend!' });
+  res.json({ message: 'Hello, frontend!' });
 });
 
 // account routes
